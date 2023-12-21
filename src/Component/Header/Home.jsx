@@ -1,4 +1,5 @@
 import Banner from "./Banner";
+import Footer from "./Footer";
 import NavBar from "./NavBar";
 import Sector from "./Sector";
 
@@ -9,6 +10,7 @@ const Home = () => {
 
       <Banner></Banner>
       <Sector></Sector>
+      <Footer></Footer>
     </div>
   );
 };
