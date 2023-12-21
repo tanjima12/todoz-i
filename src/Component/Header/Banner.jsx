@@ -35,23 +35,25 @@ const Banner = () => {
     <div>
       <div>
         <img
-          className="relative h-[750px] w-full"
+          className="relative h-[600px] w-full"
           src="https://i.ibb.co/z6LBPXX/top-view-break-time-written-sticky-note-list-black-notepad-phone-pen-calculator-ruler-binder-clips-k.jpg"
         ></img>
-        <div className="absolute top-48 ml-20 ">
+        <div className="absolute top-60 ml-20 ">
           <h1 className="ml7">
             <span className="text-wrapper">
               <span className="letters text-white">
-                Introducing{" "}
+                Welcome to
                 <span className="bg-gradient-to-r from-[#B7F8DB] to-[#50A7C2] text-transparent bg-clip-text">
                   ToDoz.io
                 </span>{" "}
-                the go-to task <br></br> management solution for students,
-                <br></br> office workers, and programmers.
+                your ultimate destination<br></br> for efficient task
+                management! Empower your<br></br> productivity, stay organized,
+                and achieve your<br></br> goals seamlessly with our intuitive
+                to-do list<br></br> platform.
               </span>
             </span>
           </h1>
-          <Link>
+          <Link to="/dashboard">
             <Button variant="contained" endIcon={<SendIcon />}>
               Lets Explore
             </Button>

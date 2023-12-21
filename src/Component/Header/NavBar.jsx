@@ -12,6 +12,8 @@ import Button from "@mui/material/Button";
 // import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
+import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../LogIn/AuthProvider";
 
 const pages = ["Home", "About", "Contact Us"];
 // const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -19,6 +21,15 @@ const pages = ["Home", "About", "Contact Us"];
 const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   //   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const { user, logOut } = React.useContext(AuthContext);
+  const handleSignout = () => {
+    logOut()
+      .then((result) => {
+        console.log(result, "successfully log out");
+      })
+      .catch((error) => console.error(error));
+  };
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -92,11 +103,18 @@ const NavBar = () => {
                   display: { xs: "block", md: "none" },
                 }}
               >
-                {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center" className="flex flex-col">
+                    <NavLink to="/">Home</NavLink>
+                    <NavLink to="/contact">Contact</NavLink>
+                    <NavLink to="/contact">About</NavLink>
+                  </Typography>
+                </MenuItem>
+                {/* {pages.map((page) => (
+                  <MenuItem key={page} >
+                    <Typography >{page}</Typography>
                   </MenuItem>
-                ))}
+                ))} */}
               </Menu>
             </Box>
             <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -119,49 +137,52 @@ const NavBar = () => {
               ToDoz.io
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              {pages.map((page) => (
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                <NavLink to="/">Home</NavLink>
+                <NavLink className="ml-5" to="/contact">
+                  Contact
+                </NavLink>
+                <NavLink className="ml-5">About</NavLink>
+              </Button>
+              {/* {pages.map((page) => (
                 <Button
                   key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
+                  
                 >
                   {page}
                 </Button>
-              ))}
+              ))} */}
             </Box>
 
-            {/* <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box> */}
-            <Button variant="contained" href="#contained-buttons">
-              LogIn
-            </Button>
+            {user ? (
+              <>
+                <div className="flex items-center">
+                  <span>{user?.displayName}</span>
+                  <img
+                    className="h-10 w-10 rounded-full"
+                    src={user?.photoURL}
+                  ></img>
+                </div>
+                <Button
+                  onClick={handleSignout}
+                  variant="contained"
+                  href="#contained-buttons"
+                >
+                  LogOut
+                </Button>
+              </>
+            ) : (
+              <>
+                <NavLink to="/login">
+                  <Button variant="contained" href="#contained-buttons">
+                    LogIn
+                  </Button>
+                </NavLink>
+              </>
+            )}
           </Toolbar>
         </Container>
       </AppBar>

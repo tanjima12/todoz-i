@@ -1,5 +1,6 @@
 import Banner from "./Banner";
 import NavBar from "./NavBar";
+import Sector from "./Sector";
 
 const Home = () => {
   return (
@@ -7,7 +8,7 @@ const Home = () => {
       <NavBar></NavBar>
 
       <Banner></Banner>
-      <h1>My Home</h1>
+      <Sector></Sector>
     </div>
   );
 };
