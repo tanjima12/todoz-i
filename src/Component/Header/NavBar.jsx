@@ -60,7 +60,7 @@ const NavBar = () => {
                 textDecoration: "none",
               }}
             >
-              ToDoz
+              ToDoz.io
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
