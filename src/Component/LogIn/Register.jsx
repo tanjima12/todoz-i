@@ -4,6 +4,7 @@ import "./Register.css";
 
 import { AuthContext } from "./AuthProvider";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const { createUser, updateUser } = useContext(AuthContext);
@@ -49,6 +50,11 @@ const Register = () => {
               <span></span>
             </button>
           </center>
+          <Link to="/login">
+            <button className=" flex justify-center px-5 py-2 bg-black">
+              Login
+            </button>
+          </Link>
         </form>
       </div>
     </div>
