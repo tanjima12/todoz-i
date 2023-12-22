@@ -2,13 +2,12 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Login.css";
 import NavBar from "../Header/NavBar";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "./AuthProvider";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 
 const LogIn = () => {
-  const [mainUser, setMainUser] = useState(null);
   const { SignIn } = useContext(AuthContext);
   const provider = new GoogleAuthProvider();
   const auth = getAuth();
@@ -56,41 +55,6 @@ const LogIn = () => {
       navigate(location.state ? location?.state : "/");
     });
   };
-  //   const handleLogIn = (e) => {
-  //     e.preventDefault();
-  //     const form = new FormData(e.currentTarget);
-  //     const email = form.get("email");
-  //     const password = form.get("password");
-
-  //     SignIn(email, password)
-  //       .then((result) => {
-  //         console.log(result.user);
-  //         // const loggedInUser = result.user;
-  //         // console.log(loggedInUser);
-  //         // const user = { email };
-  //         // axios.post("https://b8a12-server-side-tanjima12.vercel.app/jwt", user).then((res) => {
-  //         //   console.log(res.data);
-  //         // });
-
-  //         navigate(location.state ? location?.state : "/");
-  //         //    Swal.fire({
-  //         //      position: "top-end",
-  //         //      icon: "success",
-  //         //      title: "User logged in successfully",
-  //         //      showConfirmButton: false,
-  //         //      timer: 1500,
-  //         //    });
-  //       })
-  //       .catch((error) => {
-  //         console.error(error);
-  //         //    Swal.fire({
-  //         //      icon: "error",
-  //         //      title: "Oops...",
-  //         //      text: "Something went wrong!",
-  //         //      footer: '<a href="#">Why do I have this issue?</a>',
-  //         //    });
-  //       });
-  //   };
 
   return (
     <div>
