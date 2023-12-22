@@ -6,12 +6,12 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./Component/Root/Root";
 import Home from "./Component/Header/Home";
 
-import TaskForm from "./Component/Dashboard/TaskForm";
 import LogIn from "./Component/LogIn/LogIn";
 import Register from "./Component/LogIn/Register";
 import AuthProvider from "./Component/LogIn/AuthProvider";
 import PrivateRoute from "./Component/LogIn/PrivateRoute";
 import Contact from "./Component/Header/Contact";
+import Dashboard from "./Component/Dashboard/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: (
       <PrivateRoute>
-        <TaskForm></TaskForm>
+        <Dashboard></Dashboard>
       </PrivateRoute>
     ),
   },
