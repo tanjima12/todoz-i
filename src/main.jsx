@@ -12,6 +12,9 @@ import AuthProvider from "./Component/LogIn/AuthProvider";
 import PrivateRoute from "./Component/LogIn/PrivateRoute";
 import Contact from "./Component/Header/Contact";
 import Dashboard from "./Component/Dashboard/Dashboard";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import UpdateTask from "./Component/Dashboard/UpdateTask";
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -44,12 +47,20 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
   },
+  {
+    path: "/dashboard/updateList/:id",
+    element: <UpdateTask></UpdateTask>,
+    loader: ({ params }) =>
+      fetch(`http://localhost:5007/updateTodo/${params.id}`),
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </QueryClientProvider>
   </React.StrictMode>
 );

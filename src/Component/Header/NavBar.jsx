@@ -107,7 +107,7 @@ const NavBar = () => {
                   <Typography textAlign="center" className="flex flex-col">
                     <NavLink to="/">Home</NavLink>
                     <NavLink to="/contact">Contact</NavLink>
-                    <NavLink to="/contact">About</NavLink>
+                    <NavLink to="/dashboard">Dashboard</NavLink>
                   </Typography>
                 </MenuItem>
                 {/* {pages.map((page) => (
@@ -145,7 +145,9 @@ const NavBar = () => {
                 <NavLink className="ml-5" to="/contact">
                   Contact
                 </NavLink>
-                <NavLink className="ml-5">About</NavLink>
+                <NavLink className="ml-5" to="/dashboard">
+                  Dashboard
+                </NavLink>
               </Button>
               {/* {pages.map((page) => (
                 <Button

@@ -1,14 +1,45 @@
 import Swal from "sweetalert2";
 import "./Dashboard.css";
-import { useNavigate } from "react-router-dom";
+
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../LogIn/AuthProvider";
 import { useContext } from "react";
 import useAxiosPublic from "../Hook/PublicAxios";
+import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosPublic();
+  const { data: todo = [], refetch } = useQuery({
+    queryKey: ["todolist"],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/addList`);
+      refetch();
+      return res.data;
+    },
+  });
+  const handleDelete = (_id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/addListDlt/${_id}`).then((res) => {
+          refetch();
+          console.log(res);
+
+          Swal.fire("Deleted!", "Your file has been deleted.", "success");
+        });
+      }
+    });
+  };
+
   const {
     register,
     reset,
@@ -43,6 +74,7 @@ const Dashboard = () => {
         <h1 className="text-3xl font-poppins font-bold text-center">
           Create List
         </h1>
+        <hr></hr>
         <div>
           <div className="card">
             <span className="title">Create a list</span>
@@ -78,12 +110,46 @@ const Dashboard = () => {
       </div>
       <div>
         <h1 className="text-3xl font-poppins font-bold">To do List</h1>
+        <hr></hr>
+        <div className="mt-10">
+          {todo?.map((todo) => (
+            <div className="mb-5" key={todo._id}>
+              <h1>
+                <span className="text-xl font-semibold">Title: </span>{" "}
+                {todo.Title}
+              </h1>
+              <h1>
+                <span className="text-xl font-semibold">Description: </span>
+                {todo.Description}
+              </h1>
+              <h1>
+                <span className="text-xl font-semibold">Deadline: </span>
+                {todo.Deadline}
+              </h1>
+              <h1>
+                <span className="text-xl font-semibold">Priority: </span>
+                {todo.Priority}
+              </h1>
+              <button
+                onClick={() => handleDelete(todo._id)}
+                className="px-5 py-3 bg-teal-100"
+              >
+                Delete
+              </button>
+              <Link to={`updateList/${todo._id}`}>
+                <button className="px-5 py-3 bg-teal-100 ml-5">Edit</button>
+              </Link>
+            </div>
+          ))}
+        </div>
       </div>
       <div>
         <h1 className="text-3xl font-poppins font-bold">Ongoing</h1>
+        <hr></hr>
       </div>
       <div>
         <h1 className="text-3xl font-poppins font-bold">Complete</h1>
+        <hr></hr>
       </div>
     </div>
   );

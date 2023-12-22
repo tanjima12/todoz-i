@@ -35,7 +35,7 @@ const Banner = () => {
     <div>
       <div>
         <img
-          className="relative h-[600px] w-full"
+          className="relative lg:h-[600px] lg:w-full"
           src="https://i.ibb.co/z6LBPXX/top-view-break-time-written-sticky-note-list-black-notepad-phone-pen-calculator-ruler-binder-clips-k.jpg"
         ></img>
         <div className="absolute top-60 ml-20 ">
