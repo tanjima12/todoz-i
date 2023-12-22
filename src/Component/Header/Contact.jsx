@@ -7,12 +7,13 @@ import {
   FaWhatsapp,
 } from "react-icons/fa";
 import { MdOutgoingMail } from "react-icons/md";
+import Footer from "./Footer";
 
 const Contact = () => {
   return (
     <div>
       <NavBar></NavBar>
-      <div className="flex items-center justify-center ml-20">
+      <div className="flex flex-col lg:flex-row items-center justify-center ml-2 lg:ml-20">
         <h1 className="text-2xl font-poppins">
           Have questions, suggestions, or need assistance? Feel free <br></br>to
           reach out to our dedicated support team. We are here to help! Your
@@ -20,11 +21,11 @@ const Contact = () => {
           management experience.
         </h1>
         <img
-          className="h-[700px] w-[1400px]"
+          className="lg:h-[700px] lg:w-[1400px]"
           src="https://i.ibb.co/D1ScRr6/12084824-20943984.jpg"
         ></img>
       </div>
-      <div className="mb-20 flex justify-around">
+      <div className="mb-20 ml-5 flex flex-col lg:flex-row justify-around">
         <div>
           <h1 className="text-3xl font-poppins font-bold mb-3">
             For Live contact
@@ -73,6 +74,7 @@ const Contact = () => {
           </p>
         </div>
       </div>
+      <Footer></Footer>
     </div>
   );
 };

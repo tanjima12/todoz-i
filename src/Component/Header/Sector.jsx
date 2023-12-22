@@ -3,7 +3,7 @@ import taskani from "../../assets/animation/Animation - 1703185090246.json";
 
 const Sector = () => {
   return (
-    <div className="flex ml-10 mr-10 mt-10 items-center justify-around gap-5">
+    <div className="flex flex-col lg:flex-row ml-10 mr-10 mt-10 items-center justify-around gap-5">
       <div>
         <p className="text-xl font-poppins">
           Introducing our versatile todo list website designed<br></br> with you

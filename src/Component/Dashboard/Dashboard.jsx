@@ -69,7 +69,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="flex justify-between mt-20 ml-10 mr-10">
+    <div className="flex flex-col lg:flex-row justify-between mt-20 ml-10 mr-10">
       <div>
         <h1 className="text-3xl font-poppins font-bold text-center">
           Create List
@@ -109,9 +109,11 @@ const Dashboard = () => {
         </div>
       </div>
       <div>
-        <h1 className="text-3xl font-poppins font-bold">To do List</h1>
+        <h1 className="text-3xl font-poppins font-bold text-center">
+          To do List
+        </h1>
         <hr></hr>
-        <div className="mt-10">
+        <div className="mt-10 ml-10 lg:ml-2">
           {todo?.map((todo) => (
             <div className="mb-5" key={todo._id}>
               <h1>
@@ -144,11 +146,13 @@ const Dashboard = () => {
         </div>
       </div>
       <div>
-        <h1 className="text-3xl font-poppins font-bold">Ongoing</h1>
+        <h1 className="text-3xl font-poppins font-bold text-center">Ongoing</h1>
         <hr></hr>
       </div>
       <div>
-        <h1 className="text-3xl font-poppins font-bold">Complete</h1>
+        <h1 className="text-3xl font-poppins font-bold text-center">
+          Complete
+        </h1>
         <hr></hr>
       </div>
     </div>
