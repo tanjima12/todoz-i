@@ -13,9 +13,9 @@ const Dashboard = () => {
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosPublic();
   const { data: todo = [], refetch } = useQuery({
-    queryKey: ["todolist"],
+    queryKey: ["todolist", user?.email],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/addList`);
+      const res = await axiosSecure.get(`/addList?email=${user?.email}`);
       refetch();
       return res.data;
     },
@@ -51,6 +51,7 @@ const Dashboard = () => {
   const onSubmit = (data) => {
     console.log(data);
     const createList = {
+      email: user?.email,
       Title: data.title,
       Description: data.description,
       Deadline: data.deadline,
@@ -68,6 +69,8 @@ const Dashboard = () => {
         console.error("create list error:", error);
       });
   };
+  // const todo = tasks.filter((task) => task.status === status);
+  // console.log(todo);
 
   return (
     <div>

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const axiosSecure = axios.create({
-  baseURL: "https://todoz-i-server.vercel.app",
+  baseURL: "http://localhost:5007",
 });
 const useAxiosPublic = () => {
   return axiosSecure;
