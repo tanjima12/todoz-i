@@ -41,6 +41,10 @@ const Register = () => {
             <label>email</label>
           </div>
           <div className="user-box">
+            <input {...register("photoURL")} type="text" />
+            <label>PhotoURL</label>
+          </div>
+          <div className="user-box">
             <input {...register("password")} type="password" />
             <label>Password</label>
           </div>

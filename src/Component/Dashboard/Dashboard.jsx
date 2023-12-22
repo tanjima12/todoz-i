@@ -7,6 +7,7 @@ import { useContext } from "react";
 import useAxiosPublic from "../Hook/PublicAxios";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
+import NavBar from "../Header/NavBar";
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
@@ -69,91 +70,96 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row justify-between mt-20 ml-10 mr-10">
-      <div>
-        <h1 className="text-3xl font-poppins font-bold text-center">
-          Create List
-        </h1>
-        <hr></hr>
+    <div>
+      <NavBar></NavBar>
+      <div className="flex flex-col lg:flex-row justify-between mt-20 ml-10 mr-10">
         <div>
-          <div className="card">
-            <span className="title">Create a list</span>
-            <form onSubmit={handleSubmit(onSubmit)} className="form">
-              <div className="group">
-                <input {...register("title")} type="text" />
-                <label>Title</label>
-              </div>
-              <div className="group">
-                <input type="text" {...register("description")} id="email" />
-                <label>Description</label>
-              </div>
-              <div className="group">
-                <input type="date" {...register("date")} id="" />
-                <label>Deadline</label>
-              </div>
-              <div>
-                <select
-                  name="role"
-                  className="group w-60 h-10 rounded-sm"
-                  {...register("priority")}
-                >
-                  <option value="Low">Low</option>
-                  <option value="High">High</option>
-                  <option value="High">Moderate</option>
-                </select>
-                <label>Priority</label>
-              </div>
-              <button type="submit">Create</button>
-            </form>
+          <h1 className="text-3xl font-poppins font-bold text-center">
+            Create List
+          </h1>
+          <hr></hr>
+          <div>
+            <div className="card">
+              <span className="title">Create a list</span>
+              <form onSubmit={handleSubmit(onSubmit)} className="form">
+                <div className="group">
+                  <input {...register("title")} type="text" />
+                  <label>Title</label>
+                </div>
+                <div className="group">
+                  <input type="text" {...register("description")} id="email" />
+                  <label>Description</label>
+                </div>
+                <div className="group">
+                  <input type="date" {...register("date")} id="" />
+                  <label>Deadline</label>
+                </div>
+                <div>
+                  <select
+                    name="role"
+                    className="group w-60 h-10 rounded-sm"
+                    {...register("priority")}
+                  >
+                    <option value="Low">Low</option>
+                    <option value="High">High</option>
+                    <option value="High">Moderate</option>
+                  </select>
+                  <label>Priority</label>
+                </div>
+                <button type="submit">Create</button>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
-      <div>
-        <h1 className="text-3xl font-poppins font-bold text-center">
-          To do List
-        </h1>
-        <hr></hr>
-        <div className="mt-10 ml-10 lg:ml-2">
-          {todo?.map((todo) => (
-            <div className="mb-5" key={todo._id}>
-              <h1>
-                <span className="text-xl font-semibold">Title: </span>{" "}
-                {todo.Title}
-              </h1>
-              <h1>
-                <span className="text-xl font-semibold">Description: </span>
-                {todo.Description}
-              </h1>
-              <h1>
-                <span className="text-xl font-semibold">Deadline: </span>
-                {todo.Deadline}
-              </h1>
-              <h1>
-                <span className="text-xl font-semibold">Priority: </span>
-                {todo.Priority}
-              </h1>
-              <button
-                onClick={() => handleDelete(todo._id)}
-                className="px-5 py-3 bg-teal-100"
-              >
-                Delete
-              </button>
-              <Link to={`updateList/${todo._id}`}>
-                <button className="px-5 py-3 bg-teal-100 ml-5">Edit</button>
-              </Link>
-            </div>
-          ))}
+        <div>
+          <h1 className="text-3xl font-poppins font-bold text-center">
+            To do List
+          </h1>
+          <hr></hr>
+          <div className="mt-10 ml-10 lg:ml-2">
+            {todo?.map((todo) => (
+              <div className="mb-5" key={todo._id}>
+                <h1>
+                  <span className="text-xl font-semibold">Title: </span>{" "}
+                  {todo.Title}
+                </h1>
+                <h1>
+                  <span className="text-xl font-semibold">Description: </span>
+                  {todo.Description}
+                </h1>
+                <h1>
+                  <span className="text-xl font-semibold">Deadline: </span>
+                  {todo.Deadline}
+                </h1>
+                <h1>
+                  <span className="text-xl font-semibold">Priority: </span>
+                  {todo.Priority}
+                </h1>
+                <button
+                  onClick={() => handleDelete(todo._id)}
+                  className="px-5 py-3 bg-teal-100"
+                >
+                  Delete
+                </button>
+                <Link to={`updateList/${todo._id}`}>
+                  <button className="px-5 py-3 bg-teal-100 ml-5">Edit</button>
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-      <div>
-        <h1 className="text-3xl font-poppins font-bold text-center">Ongoing</h1>
-        <hr></hr>
-      </div>
-      <div>
-        <h1 className="text-3xl font-poppins font-bold text-center">
-          Complete
-        </h1>
-        <hr></hr>
+        <div>
+          <h1 className="text-3xl font-poppins font-bold text-center">
+            Ongoing
+          </h1>
+          <hr></hr>
+        </div>
+        <div>
+          <h1 className="text-3xl font-poppins font-bold text-center">
+            Complete
+          </h1>
+          <hr></hr>
+        </div>
       </div>
     </div>
   );

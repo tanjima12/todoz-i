@@ -51,7 +51,7 @@ const router = createBrowserRouter([
     path: "/dashboard/updateList/:id",
     element: <UpdateTask></UpdateTask>,
     loader: ({ params }) =>
-      fetch(`http://localhost:5007/updateTodo/${params.id}`),
+      fetch(`https://todoz-i-server.vercel.app/updateTodo/${params.id}`),
   },
 ]);
 
