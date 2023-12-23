@@ -5,41 +5,43 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../LogIn/AuthProvider";
 import { useContext } from "react";
 import useAxiosPublic from "../Hook/PublicAxios";
-import { useQuery } from "@tanstack/react-query";
+import { QueryClient, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import NavBar from "../Header/NavBar";
+import TaskStatus from "./TaskStatus";
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosPublic();
-  const { data: todo = [], refetch } = useQuery({
-    queryKey: ["todolist", user?.email],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/addList?email=${user?.email}`);
-      refetch();
-      return res.data;
-    },
-  });
-  const handleDelete = (_id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        axiosSecure.delete(`/addListDlt/${_id}`).then((res) => {
-          refetch();
-          console.log(res);
+  const queryClient = useQueryClient();
+  // const { data: todo = [], refetch } = useQuery({
+  //   queryKey: ["todolist", user?.email],
+  //   queryFn: async () => {
+  //     const res = await axiosSecure.get(`/addList?email=${user?.email}`);
+  //     refetch();
+  //     return res.data;
+  //   },
+  // });
+  // const handleDelete = (_id) => {
+  //   Swal.fire({
+  //     title: "Are you sure?",
+  //     text: "You won't be able to revert this!",
+  //     icon: "warning",
+  //     showCancelButton: true,
+  //     confirmButtonColor: "#3085d6",
+  //     cancelButtonColor: "#d33",
+  //     confirmButtonText: "Yes, delete it!",
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       axiosSecure.delete(`/addListDlt/${_id}`).then((res) => {
+  //         refetch();
+  //         console.log(res);
 
-          Swal.fire("Deleted!", "Your file has been deleted.", "success");
-        });
-      }
-    });
-  };
+  //         Swal.fire("Deleted!", "Your file has been deleted.", "success");
+  //       });
+  //     }
+  //   });
+  // };
 
   const {
     register,
@@ -56,6 +58,7 @@ const Dashboard = () => {
       Description: data.description,
       Deadline: data.deadline,
       Priority: data.priority,
+      status: "todo",
     };
     console.log(createList);
     axiosSecure
@@ -64,6 +67,7 @@ const Dashboard = () => {
         console.log(res.data, "added");
         reset();
         Swal.fire("successfully added");
+        queryClient.invalidateQueries(["tasks"]);
       })
       .catch((error) => {
         console.error("create list error:", error);
@@ -75,7 +79,7 @@ const Dashboard = () => {
   return (
     <div>
       <NavBar></NavBar>
-      <div className="flex flex-col lg:flex-row justify-between mt-20 ml-10 mr-10">
+      <div className="flex justify-center mb-8 mt-20 ml-10 mr-10">
         <div>
           <h1 className="text-3xl font-poppins font-bold text-center">
             Create List
@@ -114,7 +118,7 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        <div>
+        {/* <div>
           <h1 className="text-3xl font-poppins font-bold text-center">
             To do List
           </h1>
@@ -150,20 +154,25 @@ const Dashboard = () => {
               </div>
             ))}
           </div>
-        </div>
-        <div>
+        </div> */}
+        {/* <div>
           <h1 className="text-3xl font-poppins font-bold text-center">
             Ongoing
           </h1>
           <hr></hr>
-        </div>
-        <div>
+        </div> */}
+        {/* <div>
           <h1 className="text-3xl font-poppins font-bold text-center">
             Complete
           </h1>
           <hr></hr>
-        </div>
+        </div> */}
       </div>
+      <hr></hr>
+      <TaskStatus></TaskStatus>
+      {/* <Link to="/taskStatus">
+        <p className="text-4xl">Task</p>
+      </Link> */}
     </div>
   );
 };
